@@ -1,0 +1,28 @@
+package com.yourproject.service.{{ClassName|lower}};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class {{ClassName}}Service {
+
+    @Autowired
+    private EntityManager entityManager;
+
+    public void handle() throws Exception {
+        EntityTransaction tx = entityManager.getTransaction();
+        try {
+            tx.begin();
+            // your logic
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            log.error("{{ClassName}}Service : {}", e.getMessage());
+            throw e;
+        }
+    }
+}
